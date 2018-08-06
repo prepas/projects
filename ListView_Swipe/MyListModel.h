@@ -22,7 +22,7 @@ public:
     Q_INVOKABLE virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     Q_INVOKABLE virtual int rowCount(const QModelIndex &parent) const override;
-
+    Q_INVOKABLE int count();
     virtual QHash<int,QByteArray> roleNames() const;
 
 private:

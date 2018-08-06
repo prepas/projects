@@ -11,14 +11,14 @@ MyListModel::MyListModel(QObject *parent)
         if (j % 3 == 0)
         {
             Pair_pr pr;
-            pr.first = QString("Verrry looooong:");
+            pr.first = QString("Verrry looooong");
             pr.second = QString("stringgggg");
             m_data.push_back(pr);
         }
         else
         {
             Pair_pr pr;
-            pr.first = QString("MyData:");
+            pr.first = QString("MyData");
             pr.second = QString("stringgggg");
             m_data.push_back(pr);
         }
@@ -46,6 +46,11 @@ QVariant MyListModel::data(const QModelIndex& index, int role) const
 int MyListModel::rowCount(const QModelIndex& parent) const
 {
     return m_data.size();
+}
+
+int MyListModel::count()
+{
+    return rowCount(QModelIndex());
 }
 
 QHash<int, QByteArray> MyListModel::roleNames() const

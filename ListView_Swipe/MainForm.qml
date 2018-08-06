@@ -17,13 +17,13 @@ Rectangle {
                 id: list
                 anchors.fill: parent
                 model: myModel
+                spacing: 2
                 delegate: Component {
                     Item {
                         width: parent.width - scrollBar.width
                         height: 40
                         Column {
-                            Text { text: 'Name:' + propertyNameRole }
-                            Text { text: 'Number:' + nameValueRole }
+                            Text { text: 'Name: ' + propertyNameRole }
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -48,23 +48,27 @@ Rectangle {
         {
             width: parent.width - columnLeft.width
             height: parent.height
-            ListView {
-                header: Text {
-                    text: "Header"
-
-                }
-
+            SwipeView {
+                id: swipe
                 anchors.fill: parent
-                model: myModel
-                delegate: Component {
-                    Item {
-                        width: parent.width
-                        height: 40
-                        Text { text: 'Name:' + propertyNameRole + ' ' + nameValueRole + ' ' + list.currentIndex }
+                orientation: Qt.Vertical
+                currentIndex: list.currentIndex
+                onCurrentIndexChanged: list.currentIndex = currentIndex
+
+                Repeater {
+                    model: list.count
+
+                    ListView {
+                        Column {
+                            spacing: 5
+                            Text { text: 'Name:' + ' Sergey ' + list.currentIndex }
+                            Text { text: 'Last Name: ' + 'Test ' + list.currentIndex }
+                            Text { text: 'Phone number: ' + '0123456798 ' + list.currentIndex }
+                        }
+                        focus: true
+                        ScrollBar.vertical: ScrollBar { active: true}
                     }
                 }
-                focus: true
-                ScrollBar.vertical: ScrollBar { active: true}
             }
         }
     }
