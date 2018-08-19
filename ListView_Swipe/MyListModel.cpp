@@ -5,20 +5,18 @@ MyListModel::MyListModel(QObject *parent)
 {
     for (int j = 0; j < 30; ++j)
     {
+        Pair_pr pr;
         if (j % 3 == 0)
         {
-            Pair_pr pr;
             pr.first = QString("Very looooong");
             pr.second = QString("striiiing");
-            m_data.push_back(pr);
         }
         else
         {
-            Pair_pr pr;
             pr.first = QString("MyData");
             pr.second = QString("string");
-            m_data.push_back(pr);
         }
+        m_data.push_back(pr);
     }
 }
 
@@ -30,11 +28,11 @@ QVariant MyListModel::data(const QModelIndex& index, int role) const
         return QVariant();
     }
     const Pair_pr& modelEntry = m_data[row];
-    if (role == PropertyRole)
+    if (role == Role1)
     {
         return modelEntry.first;
     }
-    if (role == ValueRole)
+    if (role == Role2)
     {
         return modelEntry.second;
     }
@@ -46,16 +44,11 @@ int MyListModel::rowCount(const QModelIndex& /*parent*/) const
     return static_cast<int>(m_data.size());
 }
 
-int MyListModel::count()
-{
-    return rowCount(QModelIndex());
-}
-
 QHash<int, QByteArray> MyListModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[PropertyRole] = "propertyNameRole";
-    roles[ValueRole] = "nameValueRole";
+    roles[Role1] = "role1";
+    roles[Role2] = "role2";
     return roles;
 }
 

@@ -3,7 +3,6 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 Rectangle {
-    id: rect
     anchors.fill: parent
     Row {
         anchors.fill: parent
@@ -20,19 +19,19 @@ Rectangle {
                     width: parent.width - scrollBar.width
                     height: 40
                     TextEdit {
-                        property string fullText: indexOfThisDelegate + ' ' + propertyNameRole + ' ' + nameValueRole
+                        property string fullText: indexOfThisDelegate + ' ' + role1 + ' ' + role2
 
-                        id: delegateTextEdit
+                        id: textEdit
                         width: parent.width
                         wrapMode: Text.NoWrap
                         readOnly: true
-                        text: delegateTextEditMetrics.elidedText
+                        text: metrics.elidedText
 
                         TextMetrics {
-                            id: delegateTextEditMetrics
+                            id: metrics
                             elide: Text.ElideRight
-                            elideWidth: delegateTextEdit.width - 10
-                            text: delegateTextEdit.fullText
+                            elideWidth: textEdit.width - 10
+                            text: textEdit.fullText
                         }
                     }
 
@@ -42,7 +41,6 @@ Rectangle {
                     }
                 }
             }
-            focus: true
             ScrollBar.vertical: ScrollBar {
                 id: scrollBar
                 active: true
@@ -55,7 +53,6 @@ Rectangle {
             highlightMoveDuration: 50
         }
         SwipeView {
-            id: swipe
             orientation: Qt.Vertical
             currentIndex: list.currentIndex
             onCurrentIndexChanged: list.currentIndex = currentIndex
@@ -65,12 +62,10 @@ Rectangle {
             Repeater {
                 model: list.count
                 Column {
-                    id: child
                     spacing: 5
-                    height: childrenRect.height
-                    Text { text: 'Name:' + ' Sergey ' + list.currentIndex }
-                    Text { text: 'Last Name: ' + 'Test ' + list.currentIndex }
-                    Text { text: 'Phone number: ' + '0123456798 ' + list.currentIndex }
+                    Text { text: 'Name: Sergey ' + list.currentIndex }
+                    Text { text: 'Last Name: Test ' + list.currentIndex }
+                    Text { text: 'Phone number: 0123456798 ' + list.currentIndex }
 
                     Image {
                         id: image
