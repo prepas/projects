@@ -1,14 +1,18 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 
 Rectangle {
+    id: root
     anchors.fill: parent
-    Row {
-        anchors.fill: parent
+    SplitView {
+        orientation: Qt.Horizontal
         ListView {
             id: list
             width: 150
+            Layout.maximumWidth: 250
+            Layout.minimumWidth: 100
             height: parent.height
             model: myModel
             spacing: 2
@@ -26,11 +30,12 @@ Rectangle {
                         wrapMode: Text.NoWrap
                         readOnly: true
                         text: metrics.elidedText
+                        font.pixelSize: 14
 
                         TextMetrics {
                             id: metrics
                             elide: Text.ElideRight
-                            elideWidth: textEdit.width - 10
+                            elideWidth: textEdit.width - scrollBar.width - 10
                             text: textEdit.fullText
                         }
                     }
@@ -56,16 +61,16 @@ Rectangle {
             orientation: Qt.Vertical
             currentIndex: list.currentIndex
             onCurrentIndexChanged: list.currentIndex = currentIndex
-            width: parent.width - list.width
-            height: parent.height
+            width: root.width - list.width
+            height: root.height
 
             Repeater {
                 model: list.count
                 Column {
                     spacing: 5
-                    Text { text: 'Name: Sergey ' + list.currentIndex }
-                    Text { text: 'Last Name: Test ' + list.currentIndex }
-                    Text { text: 'Phone number: 0123456798 ' + list.currentIndex }
+                    Text { text: 'Name: Sergey ' + list.currentIndex; font.pixelSize: 14 }
+                    Text { text: 'Last Name: Test ' + list.currentIndex; font.pixelSize: 14 }
+                    Text { text: 'Phone number: 0123456798 ' + list.currentIndex; font.pixelSize: 14 }
 
                     Image {
                         id: image
